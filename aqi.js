@@ -150,9 +150,13 @@
     },
     mounted() {
       const vm = this;
-      const api = 'http://opendata2.epa.gov.tw/AQI.json';
-      // 使用 jQuery ajax
-      $.get(api).then(function (response) {
+      let url = 'https://opendata.epa.gov.tw/ws/Data/AQI/?$format=json';
+      $.ajax({
+        url: url,
+        contentType: 'application/json',
+        method: 'GET',
+        dataType: 'jsonp'
+      }).done(function (response) {
         vm.data = response;
         console.log(response);
       });
