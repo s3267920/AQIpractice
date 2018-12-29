@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>作業練習：元件變換</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="images/favicon.ico" rel="shortcut icon" />
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="/stylesheets/all.css" />
+  <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/solid.js" integrity="sha384-+Ga2s7YBbhOD6nie0DzrZpJes+b2K1xkpKxTFFcx59QmVPaSA8c7pycsNaFwUK6l"
+    crossorigin="anonymous"></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/regular.js" integrity="sha384-t7yHmUlwFrLxHXNLstawVRBMeSLcXTbQ5hsd0ifzwGtN7ZF7RZ8ppM7Ldinuoiif"
+    crossorigin="anonymous"></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/fontawesome.js" integrity="sha384-7ox8Q2yzO/uWircfojVuCQOZl+ZZBg2D2J5nkpLqzH1HY0C1dHlTKIbpRz/LG23c"
+    crossorigin="anonymous"></script>
+  <script src="/javascripts/vendor.js"></script>
+</head>
+<!--
+            狀態對應表
+            'status-aqi1' '良好',
+            'status-aqi2' '普通',
+            'status-aqi3' '對敏感族群不健康',
+            'status-aqi4' '對所有族群不健康',
+            'status-aqi5' '非常不健康',
+            'status-aqi6' '危害'
+          -->
+<style>
+  .status-aqi1 {
+    background-color: #00ff00;
+  }
+
+  .status-aqi2 {
+    background-color: #ffff00;
+  }
+
+  .status-aqi3 {
+    background-color: #ff7e00;
+  }
+
+  .status-aqi4 {
+    background-color: #ff0000;
+  }
+
+  .status-aqi5 {
+    background-color: #8f3f97;
+    color: white;
+  }
+
+  .status-aqi6 {
+    background-color: #7e0023;
+    color: white;
+  }
+</style>
+
+<body class="bg-lighter">
+  <div class="container my-5">
+    <div class="row">
+      <div class="col-md-12 post">
+        <!-- 練習開始 -->
+        <h1 class="mt-0 text-muted">作業練習：元件變換</h1>
+
+        <h3>模板練習作業：Ajax 資料內容呈現</h3>
+        <p>本作業一定要用到元件。</p>
+        <div class="alert alert-secondary">
+          <p>提示：</p>
+          <ol class="mb-0">
+            <li>將資料內容透過 "元件" 呈現</li>
+            <li>製作城市過濾選項</li>
+            <li>將內層資料透過 emit 傳遞到外層 (作為另一個關注城市的呈現)</li>
+            <li>依據不同污染呈現不同色彩</li>
+            <li>加分題：透過 localStorage 儲存上次關注的城市</li>
+          </ol>
+        </div>
+
+        <div id="app">
+          <select name="" id="" class="form-control mb-3" v-model="filter">
+            <option value="">--- 請選擇城市 ---</option>
+            <option v-for="item in filterCounty" :value="item">{{item}}</option>
+          </select>
+          <div>
+            <h4>關注城市</h4>
+            <div class="card-columns">
+              <stared-component v-for="(items,index) in stared" :key="items.SiteName" :items='items' v-on:remove-stared="removeFromStared(index)"></stared-component>
+            </div>
+          </div>
+          <hr />
+          <div class="card-columns">
+            <card-component v-for="items in filterData" :key="items.SiteName" :items='items' v-on:add-stared="addToStared(items)"></card-component>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="./aqi.js"></script>
+</body>
+
+</html>
