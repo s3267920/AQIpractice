@@ -82,12 +82,13 @@
           <div>
             <h4>關注城市</h4>
             <div class="card-columns">
-              <stared-component v-for="(items,index) in stared" :key="items.SiteName" :items='items' v-on:remove-stared="removeFromStared(index)"></stared-component>
+              <card-component v-for="(items,index) in getStaredData" :key="items.SiteName" :items='items'
+                v-on:stared-status="removeFromStared(index)"></card-component>
             </div>
           </div>
           <hr />
           <div class="card-columns">
-            <card-component v-for="items in filterData" :key="items.SiteName" :items='items' v-on:add-stared="addToStared(items)"></card-component>
+            <card-component v-for="items in filterData" :key="items.SiteName" :items='items' v-on:stared-status="addToStared(items)"></card-component>
           </div>
         </div>
       </div>
